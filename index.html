@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f17">
+  <meta name="description" content="KAI SOUL CODE - AI chuyên lập trình">
+  <title>KAI SOUL CODE</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #080b11;
+      --panel: #0d1119;
+      --panel2: #121722;
+      --border: #222938;
+      --text: #f4f6fa;
+      --muted: #8d97a9;
+      --accent: #7161ff;
+      --accent2: #897cff;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    button,
+    textarea,
+    input {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+    /* APP */
+
+    .app {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+
+    .header {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+      background: rgba(13, 17, 25, .96);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #6f5cff, #9286ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 900;
+      color: white;
+    }
+
+    .brand-name {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .4px;
+    }
+
+    .brand-sub {
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 7px;
+    }
+
+    .header-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: #171c27;
+      border: 1px solid #272e3d;
+      color: #cbd2df;
+      font-size: 15px;
+    }
+
+    /* BODY */
+
+    .body {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+      width: 245px;
+      background: #0a0e15;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      padding: 12px;
+    }
+
+    .new-chat {
+      width: 100%;
+      height: 42px;
+      border-radius: 9px;
+      background: var(--accent);
+      color: white;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .side-title {
+      color: #707a8d;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 7px 6px;
+    }
+
+    .history {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .history-item {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      background: transparent;
+      color: #aeb6c5;
+      text-align: left;
+      font-size: 12px;
+      margin-bottom: 3px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .history-item:hover,
+    .history-item.active {
+      background: #161c28;
+      color: white;
+    }
+
+    .mode-box {
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+    }
+
+    .mode-select {
+      width: 100%;
+      height: 39px;
+      border-radius: 8px;
+      border: 1px solid #282f3f;
+      background: #121722;
+      color: #dce2ec;
+      padding: 0 10px;
+      outline: none;
+    }
+
+    /* CHAT AREA */
+
+    .chat-area {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .chat-top {
+      height: 52px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
+      flex-shrink: 0;
+    }
+
+    .chat-title {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .online {
+      margin-left: 8px;
+      font-size: 10px;
+      color: #69d58f;
+    }
+
+    /* MESSAGES */
+
+    .messages {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 25px 18px 140px;
+      scroll-behavior: smooth;
+    }
+
+    .welcome {
+      max-width: 700px;
+      margin: 8vh auto 35px;
+      text-align: center;
+    }
+
+    .welcome-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #6e5cff, #8d80ff);
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .welcome h1 {
+      margin-top: 17px;
+      font-size: 27px;
+    }
+
+    .welcome p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      margin-top: 9px;
+    }
+
+    .quick-tools {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .quick-btn {
+      background: #121722;
+      border: 1px solid #282f3f;
+      color: #bfc7d5;
+      border-radius: 9px;
+      padding: 9px 11px;
+      font-size: 11px;
+    }
+
+    .quick-btn:hover {
+      background: #1a2030;
+      color: white;
+    }
+
+    /* MESSAGE */
+
+    .message {
+      width: min(850px, 100%);
+      margin: 0 auto 22px;
+      display: flex;
+      gap: 11px;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .avatar.ai {
+      background: linear-gradient(135deg, #6f5cff, #8d80ff);
+    }
+
+    .avatar.user {
+      background: #242b39;
+      color: #cbd3df;
+    }
+
+    .message-content {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .message-name {
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #cbd3df;
+    }
+
+    .message-text {
+      color: #d4dae4;
+      font-size: 13px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* CODE */
+
+    .code-block {
+      margin-top: 12px;
+      border: 1px solid #293143;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #090d14;
+    }
+
+    .code-head {
+      height: 34px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px;
+      background: #121722;
+      border-bottom: 1px solid #293143;
+    }
+
+    .code-lang {
+      color: #929caf;
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .copy-code {
+      background: transparent;
+      color: #9da7b8;
+      font-size: 10px;
+    }
+
+    .code-body {
+      padding: 13px;
+      overflow-x: auto;
+    }
+
+    .code-body pre {
+      color: #d6dce7;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre;
+    }
+
+    /* INPUT AREA */
+
+    .composer-wrap {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 18px 15px;
+      background: linear-gradient(
+        transparent,
+        var(--bg) 22%
+      );
+    }
+
+    .composer {
+      width: min(850px, 100%);
+      margin: auto;
+      background: #111620;
+      border: 1px solid #30384a;
+      border-radius: 15px;
+      padding: 9px;
+      box-shadow: 0 8px 35px rgba(0,0,0,.3);
+    }
+
+    .composer textarea {
+      width: 100%;
+      min-height: 48px;
+      max-height: 150px;
+      resize: none;
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: white;
+      padding: 7px 8px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .composer textarea::placeholder {
+      color: #6f7889;
+    }
+
+    .composer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 3px 0;
+    }
+
+    .composer-left {
+      display: flex;
+      gap: 5px;
+    }
+
+    .attach-btn,
+    .mode-btn {
+      height: 32px;
+      padding: 0 9px;
+      border-radius: 7px;
+      background: #191f2b;
+      border: 1px solid #292f3e;
+      color: #9fa8b8;
+      font-size: 10px;
+    }
+
+    .send-btn {
+      width: 38px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: white;
+      font-size: 15px;
+    }
+
+    .send-btn:disabled {
+      opacity: .45;
+    }
+
+    /* MOBILE */
+
+    .mobile-bar {
+      display: none;
+    }
+
+    @media (max-width: 800px) {
+
+      .sidebar {
+        display: none;
+      }
+
+      .brand-sub {
+        display: none;
+      }
+
+      .header {
+        height: 56px;
+        padding: 0 10px;
+      }
+
+      .chat-top {
+        height: 45px;
+        padding: 0 12px;
+      }
+
+      .messages {
+        padding: 18px 11px 130px;
+      }
+
+      .welcome {
+        margin-top: 6vh;
+      }
+
+      .welcome h1 {
+        font-size: 23px;
+      }
+
+      .welcome p {
+        font-size: 12px;
+      }
+
+      .message {
+        margin-bottom: 19px;
+      }
+
+      .composer-wrap {
+        padding: 8px 9px 10px;
+      }
+
+      .composer {
+        border-radius: 13px;
+      }
+
+      .mobile-bar {
+        display: flex;
+        height: 48px;
+        background: #0d1119;
+        border-top: 1px solid var(--border);
+        align-items: center;
+        justify-content: space-around;
+        flex-shrink: 0;
+      }
+
+      .mobile-bar button {
+        background: transparent;
+        color: #778194;
+        font-size: 9px;
+      }
+
+      .mobile-bar span {
+        display: block;
+        font-size: 16px;
+        margin-bottom: 2px;
+      }
+
+      .mobile-bar button.active {
+        color: white;
+      }
+    }
+
+    @media (max-width: 430px) {
+
+      .header-btn {
+        width: 33px;
+        height: 33px;
+      }
+
+      .quick-tools {
+        gap: 6px;
+      }
+
+      .quick-btn {
+        padding: 8px 9px;
+      }
+
+      .composer-bottom {
+        gap: 5px;
+      }
+
+      .mode-btn {
+        max-width: 110px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <header class="header">
+
+    <div class="brand">
+      <div class="logo">KS</div>
+
+      <div>
+        <div class="brand-name">KAI SOUL CODE</div>
+        <div class="brand-sub">AI CODING ASSISTANT</div>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button class="header-btn" id="newChatBtn" title="New chat">＋</button>
+      <button class="header-btn" id="settingsBtn" title="Settings">⚙</button>
+    </div>
+
+  </header>
+
+  <div class="body">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <button class="new-chat" id="newChatSide">
+        ＋ New Chat
+      </button>
+
+      <div class="side-title">
+        Conversations
+      </div>
+
+      <div class="history" id="history">
+
+        <button class="history-item active">
+          New coding conversation
+        </button>
+
+      </div>
+
+      <div class="mode-box">
+
+        <div class="side-title">
+          Coding Mode
+        </div>
+
+        <select class="mode-select" id="modeSelect">
+          <option value="developer">🟡 Developer</option>
+          <option value="beginner">🟢 Beginner</option>
+          <option value="expert">🔴 Expert</option>
+          <option value="debug">🛠️ Debug Mode</option>
+          <option value="game">🎮 Game Mode</option>
+          <option value="web">🌐 Web Mode</option>
+          <option value="app">📱 App Mode</option>
+        </select>
+
+      </div>
+
+    </aside>
+
+    <!-- CHAT -->
+    <main class="chat-area">
+
+      <div class="chat-top">
+        <span class="chat-title">KAI SOUL AI</span>
+        <span class="online">● ONLINE</span>
+      </div>
+
+      <div class="messages" id="messages">
+
+        <!-- WELCOME -->
+
+        <div class="welcome" id="welcome">
+
+          <div class="welcome-icon">
+            KS
+          </div>
+
+          <h1>KAI SOUL CODE</h1>
+
+          <p>
+            AI chuyên lập trình.<br>
+            Tạo code, debug, sửa lỗi, review và xây dựng project.
+          </p>
+
+          <div class="quick-tools">
+
+            <button class="quick-btn" data-tool="generate">
+              ⚡ Generate
+            </button>
+
+            <button class="quick-btn" data-tool="debug">
+              🐞 Debug
+            </button>
+
+            <button class="quick-btn" data-tool="fix">
+              🔧 Fix Code
+            </button>
+
+            <button class="quick-btn" data-tool="explain">
+              📖 Explain
+            </button>
+
+            <button class="quick-btn" data-tool="review">
+              🔍 Review
+            </button>
+
+            <button class="quick-btn" data-tool="refactor">
+              ♻️ Refactor
+            </button>
+
+            <button class="quick-btn" data-tool="convert">
+              🔄 Convert
+            </button>
+
+            <button class="quick-btn" data-tool="builder">
+              🏗️ Build Project
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- COMPOSER -->
+
+      <div class="composer-wrap">
+
+        <div class="composer">
+
+          <textarea
+            id="messageInput"
+            placeholder="Mô tả code hoặc vấn đề bạn đang gặp..."
+            rows="1"></textarea>
+
+          <div class="composer-bottom">
+
+            <div class="composer-left">
+
+              <button class="attach-btn" id="attachBtn">
+                📎 File
+              </button>
+
+              <button class="mode-btn" id="modeButton">
+                🟡 Developer
+              </button>
+
+              <input
+                type="file"
+                id="fileInput"
+                hidden
+                multiple
+              >
+
+            </div>
+
+            <button
+              class="send-btn"
+              id="sendBtn"
+              disabled>
+              ➤
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- MOBILE BAR -->
+
+  <nav class="mobile-bar">
+
+    <button class="active">
+      <span>💬</span>
+      Chat
+    </button>
+
+    <button id="mobileNew">
+      <span>＋</span>
+      New
+    </button>
+
+    <button id="mobileFiles">
+      <span>📁</span>
+      Files
+    </button>
+
+    <button id="mobileSettings">
+      <span>⚙️</span>
+      Settings
+    </button>
+
+  </nav>
+
+</div>
+
+
+<script>
+
+  const input = document.getElementById("messageInput");
+  const sendBtn = document.getElementById("sendBtn");
+  const messages = document.getElementById("messages");
+  const welcome = document.getElementById("welcome");
+  const modeSelect = document.getElementById("modeSelect");
+  const modeButton = document.getElementById("modeButton");
+  const fileInput = document.getElementById("fileInput");
+
+  /* INPUT */
+
+  input.addEventListener("input", () => {
+
+    sendBtn.disabled = !input.value.trim();
+
+    input.style.height = "auto";
+
+    input.style.height =
+      Math.min(input.scrollHeight, 150) + "px";
+
+  });
+
+  /* SEND */
+
+  function sendMessage() {
+
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    welcome.style.display = "none";
+
+    addMessage(
+      "user",
+      "Bạn",
+      text
+    );
+
+    input.value = "";
+    input.style.height = "48px";
+    sendBtn.disabled = true;
+
+    /*
+      AI BACKEND SẼ ĐƯỢC NỐI Ở ĐÂY.
+
+      Ví dụ sau này:
+
+      fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: text,
+          mode: modeSelect.value
+        })
+      });
+    */
+
+    setTimeout(() => {
+
+      addMessage(
+        "ai",
+        "KAI SOUL",
+        "Tôi đã nhận yêu cầu của bạn. AI backend chưa được kết nối. Bước tiếp theo sẽ kết nối chatbot với server.js để KAI SOUL có thể trả lời và tạo code thật."
+      );
+
+    }, 400);
+
+  }
+
+  sendBtn.addEventListener(
+    "click",
+    sendMessage
+  );
+
+  input.addEventListener("keydown", e => {
+
+    if (
+      e.key === "Enter" &&
+      !e.shiftKey
+    ) {
+
+      e.preventDefault();
+      sendMessage();
+
+    }
+
+  });
+
+
+  /* ADD MESSAGE */
+
+  function addMessage(type, name, text) {
+
+    const message =
+      document.createElement("div");
+
+    message.className =
+      "message";
+
+    message.innerHTML = `
+      <div class="avatar ${type}">
+        ${type === "ai" ? "KS" : "YOU"}
+      </div>
+
+      <div class="message-content">
+
+        <div class="message-name">
+          ${name}
+        </div>
+
+        <div class="message-text"></div>
+
+      </div>
+    `;
+
+    message.querySelector(
+      ".message-text"
+    ).textContent = text;
+
+    messages.appendChild(message);
+
+    messages.scrollTop =
+      messages.scrollHeight;
+
+  }
+
+
+  /* QUICK TOOLS */
+
+  document
+    .querySelectorAll(".quick-btn")
+    .forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        const tool =
+          button.dataset.tool;
+
+        const prompts = {
+
+          generate:
+            "Tạo code cho tôi: ",
+
+          debug:
+            "Debug đoạn code sau và tìm nguyên nhân lỗi: ",
+
+          fix:
+            "Sửa toàn bộ lỗi trong code sau và trả về full code: ",
+
+          explain:
+            "Giải thích đoạn code sau từ cơ bản đến nâng cao: ",
+
+          review:
+            "Review đoạn code sau về bug, hiệu năng, bảo mật và cấu trúc: ",
+
+          refactor:
+            "Refactor đoạn code sau cho sạch, tối ưu và dễ bảo trì: ",
+
+          convert:
+            "Convert đoạn code sau sang: ",
+
+          builder:
+            "Xây dựng cho tôi một project hoàn chỉnh về: "
+
+        };
+
+        input.value =
+          prompts[tool] || "";
+
+        input.focus();
+
+        input.dispatchEvent(
+          new Event("input")
+        );
+
+      });
+
+    });
+
+
+  /* MODE */
+
+  modeSelect.addEventListener(
+    "change",
+    () => {
+
+      const option =
+        modeSelect.options[
+          modeSelect.selectedIndex
+        ];
+
+      modeButton.textContent =
+        option.text;
+
+    }
+  );
+
+
+  /* FILE */
+
+  document
+    .getElementById("attachBtn")
+    .addEventListener(
+      "click",
+      () => fileInput.click()
+    );
+
+
+  fileInput.addEventListener(
+    "change",
+    () => {
+
+      if (!fileInput.files.length)
+        return;
+
+      const names =
+        [...fileInput.files]
+          .map(file => file.name)
+          .join(", ");
+
+      input.value =
+        "Phân tích file: " + names;
+
+      input.dispatchEvent(
+        new Event("input")
+      );
+
+    }
+  );
+
+
+  /* NEW CHAT */
+
+  function newChat() {
+
+    messages.innerHTML = "";
+
+    messages.appendChild(welcome);
+
+    welcome.style.display = "block";
+
+    input.value = "";
+
+    sendBtn.disabled = true;
+
+  }
+
+  document
+    .getElementById("newChatBtn")
+    .addEventListener(
+      "click",
+      newChat
+    );
+
+  document
+    .getElementById("newChatSide")
+    .addEventListener(
+      "click",
+      newChat
+    );
+
+  document
+    .getElementById("mobileNew")
+    .addEventListener(
+      "click",
+      newChat
+    );
+
+
+  /* SETTINGS */
+
+  document
+    .getElementById("settingsBtn")
+    .addEventListener(
+      "click",
+      () => {
+        alert(
+          "Settings sẽ được xây dựng ở bước tiếp theo."
+        );
+      }
+    );
+
+  document
+    .getElementById("mobileSettings")
+    .addEventListener(
+      "click",
+      () => {
+        alert(
+          "Settings sẽ được xây dựng ở bước tiếp theo."
+        );
+      }
+    );
+
+</script>
+
+</body>
+  </html>
